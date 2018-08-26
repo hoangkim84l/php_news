@@ -10,7 +10,6 @@
 <style type="text/css">
 tr td p img {
 		height:100px !important;
-		width:100px;
 		
 	}
 	.thumb{
@@ -280,7 +279,7 @@ if(isset($_GET['id'])){
                   -- <a href="index.php?id=<?php echo $row['id'];?>" onclick="return sure();">xóa</a>-- 
                   <a href="update.php?id=<?php echo $row['id'];?>">Update</a>
   	<br/>
-		<center><a class="btn btn-2" href="xem_them.php">Xem Ngay</a></center><br/>
+		<center><a class="btn btn-2" href="see_more.php">Xem Ngay</a></center><br/>
                 </div>               
               </div>
 	</div>  
