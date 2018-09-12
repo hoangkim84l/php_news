@@ -41,31 +41,38 @@ tr td p img {
 	$result=mysqli_query($conn,$sq);
     ?>
     <?php 
-	$sq="select * from news";
-	$result=mysqli_query($conn,$sq);
-?>
+    if(isset($_GET['id'])){
+    $id=$_GET['id'];	
+    settype($id, "int");
+  }else{
+    $id = 1;
+  }
+   $qr="UPDATE news SET count_view = count_view + 1 WHERE $id = $id";
+  mysqli_query($conn, $qr);
+    ?>
 <div class="container">
 <div class="row" style="text-align: center; color: red;">
-<div class="col-md-12"><h2>Danh Sách Bài Viết</h2></div>
+<div class="nav navbar-nav navbar-left"><h2>Danh Sách Bài Viết</h2></div><br>
+<div class="nav navbar-nav navbar-right">  <a class="btn btn-2" href="index.php" style="background-color: white;">TrangChủ</a></div>
 </div>
 <table width="694" border="1">
   <?php 
   	while($row=mysqli_fetch_array($result))
 	{
   ?>
-   <div class="col-sm-4">
-                <div style="border: 1px solid #8AB570;border-radius: 10px;max-height: 2000px;margin: 3px;">
+   <div class="col-sm-4"  style="margin: 0 -25px 0 1px;">
+                <div style="border: 1px solid #8AB570;border-radius: 10px;max-height: 2000px; padding: 0 10px 10px 10px;">
                   <center><h3 class="home_category_title" style="font-size: 25px;overflow: none;text-overflow: ellipsis;width:95%;height:30px;color:#000; font-size:15px;">
                     <div class="title" Style="color: red;">
                        <h4>
-                            <i><?php echo $row['id']; ?></i>--<?php echo $row['title']; ?>
+                            <?php echo $row['title']; ?>
                         </h4>
     </div>
                     <div class="intro"><?php echo $row['intro']; ?></div>
                   </center>
                   <div class="home_category_image">
                     <center>
-                        <img src="<?php echo $row['image_link'];?>" style="margin: 50px -178px 0 110px; ">
+                        <img src="Image/<?php echo $row['image_link'];?>" style="margin: 50px 0 0 0; height: 100px; width: 100px;">
                    </center>
                   </div>
                   <div class="content">
@@ -81,5 +88,6 @@ tr td p img {
   <?php
 	}
   ?>
+
 </body>
 </html>
