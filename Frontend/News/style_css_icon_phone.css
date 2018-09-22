@@ -22,7 +22,7 @@
     transition:all .5s;
     -webkit-transform-origin:50% 50%;
     -ms-transform-origin:50% 50%;
-    transform-origin:50% 50%
+    transform-origin:50% 50%;
 }
 
 .phonering-alo-phone.phonering-alo-active .phonering-alo-ph-circle {
@@ -76,7 +76,7 @@
     transition:all .5s;
     -webkit-transform-origin:50% 50%;
     -ms-transform-origin:50% 50%;
-    transform-origin:50% 50%
+    transform-origin:50% 50%;
 }
 
 .phonering-alo-phone.phonering-alo-active .phonering-alo-ph-circle-fill {
@@ -131,7 +131,8 @@
     animation:phonering-alo-circle-img-anim 1s infinite ease-in-out;
     -webkit-transform-origin:50% 50%;
     -ms-transform-origin:50% 50%;
-    transform-origin:50% 50%
+    transform-origin:50% 50%;
+    z-index: 999;
 }
 
 .phonering-alo-phone.phonering-alo-active .phonering-alo-ph-img-circle {

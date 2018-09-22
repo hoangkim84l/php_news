@@ -9,101 +9,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.js"></script>
   <link rel="stylesheet" href="style_css_icon_phone.css">
-  <style type="text/css">
-    tr td p img {
-      height: auto !important;
-      max-width: 100%;
-      display: block;
-    }
-
-    .thumb {
-      height: 100px !important;
-    }
-
-    tr td div span img {
-      height: auto !important;
-      max-width: 100%;
-      display: block;
-    }
-
-    a {
-      text-decoration: none;
-    }
-
-    h3 {
-      margin: auto;
-      font-size: 15px;
-    }
-
-    #header {
-      background-color: #8AB570;
-      color: white;
-      text-align: center;
-      height: 50px;
-      padding-top: 12px;
-    }
-
-    #menu {
-      width: 85%;
-      height: 150px;
-      background-color: #FFF;
-      margin-left: 100px;
-
-    }
-
-    #left {
-      width: 250px;
-      height: 400px;
-      background-color: #fff;
-      float: left;
-      margin-left: 100px;
-      text-decoration: none;
-    }
-    #content {
-      width: 900px;
-      background-color: white;
-      height: auto;
-      float: left;
-      margin: 0 0 20px 0;
-    }
-
-    #footer {
-      width: 100%;
-      height: 300px;
-      background-color: #2D2D2D;
-      clear: both;
-      color: #FFF;
-      margin: 0 0 -50px 0;
-    }
-
-    .navbar {
-      border-top: 1px solid #CCC;
-      border-bottom: 1px solid #CCC;
-    }
-
-    .bdleft {
-      border-bottom-style: dashed;
-      border-bottom-width: 1px;
-    }
-
-    #hvleft {
-      -webkit-transform: scale(1);
-      -webkit-transition-timing-function: ease-out;
-      -webkit-transition-duration: 500ms;
-      text-decoration: none;
-    }
-
-    #hvleft :hover {
-      -webkit-transform: scale(.5);
-      -webkit-transition-timing-function: ease-out;
-      -webkit-transition-duration: 500ms;
-      text-decoration: none;
-    }
-
-    .container {
-      width: 950px;
-    }
-  </style>
+  <link rel="stylesheet" href="scroll_to_top.css">
+  <link rel="stylesheet" href="index_css.css">
   <script>
     function sure()
 	{
@@ -116,22 +23,56 @@
 		}
 			}
 </script>
+<script>
+$(document).ready(function(){
+$(window).scroll(function(){
+    if ($(this).scrollTop() > 100) {
+        $('.scrollToTop').fadeIn();
+    } else {
+        $('.scrollToTop').fadeOut();
+    }
+});
+
+$('.scrollToTop').click(function(){
+    $('html, body').animate({scrollTop : 0},800);
+    return false;
+});
+
+});
+</script>
 </head>
 
 <body>
-  <?php include("../../Include/connection.php");
+  <?php 
+  session_start();
+  include("../../Include/connection.php");
 if(isset($_GET['id'])){
   $id=$_GET['id'];
   $sql="DELETE FROM news where id='$id'";
   mysqli_query($conn,$sql);
 }
 ?>
+   <?php
+   if (isset($_POST["btnthoat"])) {
+     unset($_SESSION["username"]);
+     echo '<meta http-equiv="REFRESH" content ="0;URL=../Login.php"/>';
+   }
+   ?>     
   <?php 
 	$sq="select * from news";
 	$result=mysqli_query($conn,$sq);
 ?>
   <div id="header">
+  <div style="float: left; margin-left: 100px;">
     Header
+    </div>
+    <div style="float: right; margin-right: 100px;"> 
+    <?php
+      echo"Chào bạn ".$_SESSION["username"];
+    ?>
+    <form action="" id="" name="" method="post" style="margin:-24px 0 0 107px;">
+    <input type="submit" value=" Thoát " name="btnthoat"></form>
+    </div>
   </div>
   <div id="menu">
     <div style="float:left">
@@ -139,90 +80,54 @@ if(isset($_GET['id'])){
     </div>
     <br>
     <br>
-    <div style="float:right">
+    <div style="float:right;">
+   
       <form id="form1" name="form1" method="post" action="">
-        <label for="timkiem"></label>
-        <input name="timkiem" type="text" id="timkiem" placeholder="Tìm Kiếm" value="active" style="opacity:0.1;" />
+        <label for="timkiem" ></label>
+        <input name="timkiem" type="text" id="timkiem" placeholder="Tìm Kiếm" value="active" style="border: 1px solid white;" />
         <input type="submit" name="Tim" id="Tim" value="Tìm" />
       </form>
-
     </div>
     <br>
     <br>
-    <div class="navbar">
-      <div class="bs-example">
-        <div class="navbar-header">
-          <div class="dropdown">
-            <button class="btn btn-success btn-lg" type="button" data-toggle="dropdown">
-              <span class="glyphicon glyphicon-th-list"></span> BUTTON</button>
-            <ul class="dropdown-menu">
-              <li>
-                <a href="#" style="margin-left: 10px; color:#000">
-                  <span class="glyphicon glyphicon-asterisk"></span>&nbsp; &nbsp; SẢN PHẨM 1
-                </a>
-              </li>
-              <div class="bdleft"></div>
-              <li>
-                <a href="#" style="margin-left: 10px; color:#000">
-                  <span class="glyphicon glyphicon-asterisk"></span>&nbsp; &nbsp; SẢN PHẨM 3
-                </a>
-              </li>
-              <div class="bdleft"></div>
-              <li>
-                <a href="#" style="margin-left: 10px; color:#000">
-                  <span class="glyphicon glyphicon-asterisk"></span>&nbsp; &nbsp; SẢN PHẨM 4
-                </a>
-              </li>
-              <div class="bdleft"></div>
-              <li>
-                <a href="#" style="margin-left: 10px; color:#000">
-                  <span class="glyphicon glyphicon-asterisk"></span>&nbsp; &nbsp; SẢN PHẨM 5
-                </a>
-              </li>
-              <div class="bdleft"></div>
-              <li>
-                <a href="#" style="margin-left: 10px; color:#000">
-                  <span class="glyphicon glyphicon-asterisk"></span>&nbsp; &nbsp; SẢN PHẨM 6
-                </a>
-              </li>
-              <div class="bdleft"></div>
-              <li>
-                <a href="#" style="margin-left: 10px; color:#000">
-                  <span class="glyphicon glyphicon-asterisk"></span>&nbsp; &nbsp; SẢN PHẨM 7
-                </a>
-              </li>
-              <div class="bdleft"></div>
-              <li>
-                <a href="#" style="margin-left: 10px; color:#000">
-                  <span class="glyphicon glyphicon-asterisk"></span>&nbsp; &nbsp; SẢN PHẨM 8
-                </a>
-              </li>
-              <div class="bdleft"></div>
-              <li>
-                <a href="#" style="margin-left: 10px; color:#000">
-                  <span class="glyphicon glyphicon-asterisk"></span>&nbsp; &nbsp; SẢN PHẨM 9
-                </a>
-              </li>
-              <div class="bdleft"></div>
-              <li>
-                <a href="#" style="margin-left: 10px; color:#000">
-                  <span class="glyphicon glyphicon-asterisk"></span>&nbsp; &nbsp; SẢN PHẨM 10
-                </a>
-              </li>
-            </ul>
-          </div>
-
-        </div>
+    <div style="border: 1px solid #D9D9D9; margin-top: 30px;">
+    <div id="navbarCollapse">
+          <ul class="nav navbar-nav navbar-left">
+          
+            <li><div class="dropdown">
+            <a href="#" class="btn btn-lg" style="border: 0px; border-radius: 0px; background-color: #8AB570; color: #fff;">
+            <span class="glyphicon glyphicon-menu-hamburger"></span> 
+            
+            Danh Mục Sản Phẩm
+            </a>
+            <div class="dropdown-content">
+              <a href="#" style="border-bottom: 1px dashed green;">
+              <span class="glyphicon glyphicon-asterisk" ></span>
+               Sản Phẩm 1
+              </a>
+              <a href="#" style="border-bottom: 1px dashed green;">
+              <span class="glyphicon glyphicon-asterisk"></span>
+              Sản Phẩm 2
+              </a>
+              <a href="#" style="border-bottom: 1px dashed green;">
+              <span class="glyphicon glyphicon-asterisk"></span>
+              Sản Phẩm 3
+              </a>
+  </div> </div>
+            </li>
+           
+</ul> 
+</div>
         <div id="navbarCollapse" class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
             <li>
               <a href="#" style="color:green">Trang Chủ</a>
             </li>
             <li>
-              <a href="#">Hình Ảnh</a>
+              <a href="#"  style="color:#3D3D3D;">Hình Ảnh</a>
             </li>
             <li>
-              <a href="#">Liên Hệ</a>
+              <a href="#"  style="color:#3D3D3D;">Liên Hệ</a>
             </li>
             <li>
               <a href="add.php">Thêm Sản Phẩm</a>
@@ -233,8 +138,9 @@ if(isset($_GET['id'])){
       </div>
     </div>
   </div>
+  </div>
   <p>&nbsp;</p>
-  <div class="phonering-alo-phone phonering-alo-green phonering-alo-show" id="phonering-alo-phoneIcon" style="left: -50px; bottom: 150px; position: fixed;">
+  <div class="phonering-alo-phone phonering-alo-green phonering-alo-show" id="phonering-alo-phoneIcon" style="right: 180px; bottom: 150px; position: fixed; z-index: 9999">
  <div class="phonering-alo-ph-circle"></div>
  <div class="phonering-alo-ph-circle-fill"></div>
  <a href="tel:+01694595117"></a>
@@ -267,14 +173,14 @@ if(isset($_GET['id'])){
           </span>
           <br>
           <b>
-            <a href="#" style="margin-left: 20px; color:#000">
+            <a href="#" style="margin-left: 45px; color:#000">
               <span class="glyphicon glyphicon-user"></span>&nbsp; : &nbsp;Võ Văn Tính
             </a>
             <br />
-            <a href="#" style="margin-left: 20px; color:#000">
+            <a href="#" style="margin-left: 45px; color:#000">
               <span class="glyphicon glyphicon-earphone"></span>&nbsp; : &nbsp;01694595117
             </a>
-            <a href="#" style="margin-left: 20px; color:#000">
+            <a href="#" style="margin-left: 45px; color:#000">
               vovantinhts@gmail.com
             </a>
           </b>
@@ -299,16 +205,16 @@ if(isset($_GET['id'])){
         <div class="col-md-4" style="margin: 0 -25px 0 1px;">
           <div style="border: 1px solid #8AB570;border-radius: 10px;max-height: 2000px; width: 100%;padding: 0 15px 0 15px;">
             <center>
-              <h3 class="home_category_title" style="overflow: none;text-overflow: ellipsis;height:30px;color:#000; font-size:15px;">
+              <h3 class="home_category_title" style="overflow: none;text-overflow: ellipsis;height:30px;color:#000; font-size:14px;">
                 <div class="title" Style="color: red;">
                   <h4>
                     <?php echo $row['title']; ?>
                   </h4>
                 </div>
-                <div class="intro">
+                <div class="intro" style="height:31px;  overflow:hidden;">
                   <?php echo $row['intro']; ?>
                 </div>
-            </center><br><br><br><br>
+            </center><br><br>
             <div class="home_category_image">
               <center>
                 <img src="Image/<?php echo $row['image_link'];?>" height="100" width="100">
@@ -334,6 +240,9 @@ if(isset($_GET['id'])){
   </div>
   </div>
   </div>
+  </div>
+  <div class="scrollToTop" data-toggle="" data-placement="left" title="Scroll to Top" style="right: 50px; top: 288px;">
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3rQQ0rWbeZeKnq-hSAT2rm047yDw2vckscVxUDEhOvCEdVAm1" style="width: 30px; height: 30px;">
   </div>
   <div id="footer">
     <div class="col-sm-12">
@@ -386,13 +295,13 @@ if(isset($_GET['id'])){
             </div>
           </div>
         </div>
-        <div class="col-sm-4">
-          <div style="border: 0px solid #3F0;margin: 15px 20px 0 0;">
-            <h3>
+        <div class="col-sm-4" style=" right: 170px;">
+          <div style="border: 0px solid #3F0;margin: 15px 50px 0 0;">
+            <h3><br />
               <span >FANPAGE(chưa có!)</span>
             </h3>
-
-            <br />
+            <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FFAPtivi%2F%3Ffb_dtsg_ag%3DAdwQFtf1uGNrJDyyRbYROL1pbBmdzKuMryYBv2Q_6mE6rw%253AAdyFtPPgSepY9Rhrbee9fAB3gQzkAiZ_qlw_Ac43iEwgfw&tabs=timeline&width=292&height=1000&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId"
+            width="300" height="220" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
             <br>
           </div>
         </div>
