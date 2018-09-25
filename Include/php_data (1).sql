@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th9 12, 2018 lúc 03:49 PM
+-- Thời gian đã tạo: Th9 25, 2018 lúc 06:41 PM
 -- Phiên bản máy phục vụ: 10.1.34-MariaDB
 -- Phiên bản PHP: 7.2.7
 
@@ -33,21 +33,25 @@ CREATE TABLE `admin` (
   `username` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `password` varchar(32) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `name` varchar(128) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
-  `admin_group_id` int(64) NOT NULL
+  `admin_group_id` int(64) NOT NULL,
+  `email` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 --
 -- Đang đổ dữ liệu cho bảng `admin`
 --
 
-INSERT INTO `admin` (`id`, `username`, `password`, `name`, `admin_group_id`) VALUES
-(1, 'admin', '96e79218965eb72c92a549dd5a330112', 'Hoàng văn Tuyền', 1),
-(7, 'admincp', '96e79218965eb72c92a549dd5a330112', 'Mod', 2),
-(8, 'tinh', '802df3c585cfbaf52752a907665bc12f', '', 0),
-(9, 'tinh', '802df3c585cfbaf52752a907665bc12f', '', 0),
-(10, 'tinh', '802df3c585cfbaf52752a907665bc12f', '', 0),
-(11, 'vo', 'e34dff622740a5e2d6ed9c41d3c49688', '', 0),
-(12, 'tinh', '802df3c585cfbaf52752a907665bc12f', '', 0);
+INSERT INTO `admin` (`id`, `username`, `password`, `name`, `admin_group_id`, `email`) VALUES
+(1, 'admin', '157102', 'Hoàng văn Tuyền', 1, ''),
+(7, 'admincp', '157102', 'Mod', 2, ''),
+(8, 'tinh', '157102', '', 0, ''),
+(9, 'tinh', '157102', '', 0, ''),
+(10, 'tinh', '157102', '', 0, ''),
+(11, 'vo', '157102', '', 0, ''),
+(12, 'tinh', '157102', '', 0, ''),
+(13, 'vo', '157102', '', 0, ''),
+(20, 'vovan', '3a1565d7ab526dff31d0075aef4b1b00', 'Tinh', 0, 'vovantinhts@gmail.com'),
+(21, 'Võ Phương Duy', '157102', 'Võ Phương Duy', 0, 'vpduy84@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -253,7 +257,7 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `title`, `intro`, `content`, `meta_desc`, `meta_key`, `image_link`, `created`, `feature`, `count_view`) VALUES
-(10, 'Cần thơ', '1 Thành phố với nhiều trường đại học lớn và nổi tiếng ở khu vực đồng bằng SCL', 'Cần thơ', '1 Thành phố với nhiều trường đại học lớn và nổi tiếng ở khu vực đồng bằng SCL', 'Cần thơ', 'for.png', 2018, '1', 15);
+(10, 'Cần thơ', '1 Thành phố với nhiều trường đại học lớn và nổi tiếng ở khu vực đồng bằng SCL', 'Cần thơ', '1 Thành phố với nhiều trường đại học lớn và nổi tiếng ở khu vực đồng bằng SCL', 'Cần thơ', 'for.png', 2018, '1', 17);
 
 -- --------------------------------------------------------
 
@@ -619,7 +623,7 @@ ALTER TABLE `video`
 -- AUTO_INCREMENT cho bảng `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT cho bảng `admin_group`
