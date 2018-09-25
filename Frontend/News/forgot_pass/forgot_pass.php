@@ -9,15 +9,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>     
 </head>
 <body>
-<?php
-     include("../../../Include/Connection.php");   
-?>
 <?php 
+     include("../../../Include/Connection.php"); 
     if(isset($_POST['btn_submit']))
     {
-        $email=$_POST['email'];
+        $email = $_POST['email'];
+        $random = rand(1000, 1000000);
         $sql="select * from admin where email='$email'";
         $result= mysqli_query($conn, $sql);
+        $qr="update admin set password =  md5('$random') where email='$email'";
+        $sq= mysqli_query($conn, $qr);
         if(mysqli_num_rows($result)>0)
   {
     echo "<script>alert('Email success');</script>";
@@ -64,7 +65,7 @@ if(isset($_POST['btn_submit']))
     $email = $_POST['email'];
     $To = $_POST['To'];
     $mail             = new PHPMailer();
-    $body             = 'Mã số của bạn để khôi phục tài khoản là: ' . rand(1000, 1000000);   // Noi dung email
+    $body             = 'Mã số của bạn để khôi phục tài khoản là: ' . $random;   // Noi dung email
     $title = 'Kích hoạt tài khoản'  ;   //Tieu de gui mail
     $mail->IsSMTP();             
     $mail->CharSet  = "utf-8";
