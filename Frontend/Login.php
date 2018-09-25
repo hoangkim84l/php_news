@@ -17,7 +17,7 @@
 if (isset($_POST['btn_log'])) 
 {
     $username=$_POST['username'];
-    $password = md5($_POST['password']);  
+    $password = md5($_POST['password']); 
      $sql="select * from admin where username='$username' and password ='$password'";
     $result= mysqli_query($conn, $sql);
   if(mysqli_num_rows($result)>0)
@@ -50,7 +50,7 @@ if (isset($_POST['btn_log']))
           </p>
         </div>
             <input type="submit" value="Login" name="btn_log" id="btn_log">
-            <a href="News/forgot_pass.php" style="float: right; border: 1px solid green; color: #767676; background-color: #E1E1E1; text-decoration: none;" >&nbsp; Quên Mật Khẩu &nbsp; </a>
+            <a href="News/forgot_pass/forgot_pass.php" style="float: right; border: 1px solid green; color: #767676; background-color: #E1E1E1; text-decoration: none;" >&nbsp; Quên Mật Khẩu &nbsp; </a>
         </form>
         </div>
         </div>

@@ -70,7 +70,7 @@ if(isset($_GET['id'])){
     <?php
       echo"Chào bạn ".$_SESSION["username"];
     ?>
-    <form action="" id="" name="" method="post" style="margin:-24px 0 0 107px;">
+    <form action="" id="" name="" method="post" style="margin:-24px 0 0 170px;">
     <input type="submit" value=" Thoát " name="btnthoat"></form>
     </div>
   </div>
@@ -227,7 +227,7 @@ if(isset($_GET['id'])){
             -- <a href="index.php?id=<?php echo $row['id'];?>" onclick="return sure();">xóa</a>--
             <a href="update.php?id=<?php echo $row['id'];?>">Update</a>
             <br />
-            <center><a class="btn btn-2" href="see_more.php?id=<?php echo $row['id'];?>"> Xem Ngay</a></center><br />
+            <center><a class="submit btn btn-success" type="submit" href="see_more.php?id=<?php echo $row['id'];?>"> Xem Ngay</a></center><br />
           </div>
         </div>
     </div>
