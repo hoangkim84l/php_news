@@ -68,7 +68,7 @@ if(isset($_GET['id'])){
     </div>
     <div style="float: right; margin-right: 100px;"> 
     <?php
-      echo"Chào bạn ".$_SESSION["username"];
+      echo"Chào bạn ".$_COOKIE["username"];
     ?>
     <form action="" id="" name="" method="post" style="margin:-24px 0 0 170px;">
     <input type="submit" value=" Thoát " name="btnthoat"></form>
@@ -241,7 +241,7 @@ if(isset($_GET['id'])){
   </div>
   </div>
   </div>
-  <div class="scrollToTop" data-toggle="" data-placement="left" title="Scroll to Top" style="right: 50px; top: 288px;">
+  <div class="scrollToTop" data-toggle="" data-placement="left" title="Scroll to Top" style="right: 50px; top: 285px;">
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3rQQ0rWbeZeKnq-hSAT2rm047yDw2vckscVxUDEhOvCEdVAm1" style="width: 30px; height: 30px;">
   </div>
   <div id="footer">

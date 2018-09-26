@@ -10,13 +10,15 @@
 </head>
 <body>
     <?php
-    session_start();
-     include("../Include/Connection.php");   
+   //session_start();
+     include("../Include/Connection.php");
+     
 ?>
 <?php
 if (isset($_POST['btn_log'])) 
 {
     $username=$_POST['username'];
+    setcookie('username' , $username, time() + 3600);
     $password = md5($_POST['password']); 
      $sql="select * from admin where username='$username' and password ='$password'";
     $result= mysqli_query($conn, $sql);
