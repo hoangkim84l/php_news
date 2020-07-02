@@ -59,5 +59,40 @@ class Product{
             return false;
         }
     }
+
+    /**
+     * Description: Get all data and limit by condition
+     * Function: readAll()
+     * @author: Di
+     * @params: $from_record_num, $records_per_page
+     * @return: Lists of product
+     */
+    function readAll($from_record_num, $records_per_page){
+        $query = "SELECT 
+                    id, name, description, price, category_id
+                  FROM 
+                  " . $this->table_name. "
+                  LIMIT
+                  {$from_record_num}, {$records_per_page}";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    /**
+     * Description: Used for paging products
+     * Function: countAll()
+     * @author: Di
+     * @params: None
+     * @return: total products
+     */
+    function countAll(){
+        $query = "SELECT id FROM " . $this->table_name . "";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+
+        $num = $stmt->rowCount();
+        return $num;
+    }
 }
 ?>
