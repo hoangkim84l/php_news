@@ -20,7 +20,7 @@ $category = new Category($db);
 //setup paginate variables
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
 //set number of records per page
-$records_per_page = 5;
+$records_per_page = 10;
 //calculate for query limir clause
 $from_record_num = ($records_per_page * $page) - $records_per_page;
 //query product
