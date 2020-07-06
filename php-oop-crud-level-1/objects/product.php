@@ -159,5 +159,25 @@ class Product{
         }
         return false;
     }
+
+    /**
+     * Description: Delete the product
+     * Function: delete()
+     * @author: Di
+     * @params: id product
+     * @return: execute a record
+     */
+    function delete(){
+        $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(1, $this->id);
+
+        if($result = $stmt->execute()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }
 ?>

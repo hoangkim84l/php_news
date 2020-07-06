@@ -57,7 +57,7 @@ $num = $stmt->rowCount();
                         <a href="update_product.php?id=<?php echo $id;?>" class="btn btn-info left-margin">
                             <span class="glyphicon glyphicon-edit"> </span> Update
                         </a>
-                        <a dlete-id="<?php echo $id;?>" class="btn btn-danger delete-object">
+                        <a delete-id="<?php echo $id;?>" class="btn btn-danger delete-object">
                             <span class="glyphicon glyphicon-remove"></span> Delete
                         </a>
                     </td> 
