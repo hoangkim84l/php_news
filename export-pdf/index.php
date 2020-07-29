@@ -234,20 +234,27 @@ require_once  __DIR__."/tcpdf.php";
     data();
 
     //Enter the name of directory
-   $pathdir = "./ns-reports/";
-   //Enter the name to creating zipped directory
-      $zipcreated = "ns-report.zip";
+    $pathdir = "./ns-reports/";
+    //Enter the name to creating zipped directory
+    $zipcreated = "ns-report.zip";
+    // exec('tar zcf my-backup.zip ns-reports/*');
+    echo exec('tar zcf my-backup.tar.gz ns-reports/test/*');
+
+    echo '...Done...';
+
+
+
    //Create new zip class
-      $newzip = new ZipArchive;
-      if($newzip -> open($zipcreated, ZipArchive::CREATE ) === TRUE) {
-         $dir = opendir($pathdir);
-         while($file = readdir($dir)) {
-            if(is_file($pathdir.$file)) {
-               $newzip -> addFile($pathdir.$file, $file);
-            }
-         }
-         $newzip ->close();
-      }
+    //   $newzip = new ZipArchive;
+    //   if($newzip -> open($zipcreated, ZipArchive::CREATE ) === TRUE) {
+    //      $dir = opendir($pathdir);
+    //      while($file = readdir($dir)) {
+    //         if(is_file($pathdir.$file)) {
+    //            $newzip -> addFile($pathdir.$file, $file);
+    //         }
+    //      }
+    //      $newzip ->close();
+    //   }
     
     // header('Content-type: application/zip');
     // header('Content-Disposition: attachment; filename="ns-report.zip"');
