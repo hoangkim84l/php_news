@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Catalog;
 use App\Models\CoreConfig;
+use App\Models\Post;
 use Closure;
 
 class SetGlobalData
@@ -14,14 +16,17 @@ class SetGlobalData
      */
     public function handle($request, Closure $next)
     {
+        $tags = Catalog::query()->get();
         $siteSetting = CoreConfig::find(1);
 
-        // $storyIds = session()->get('recently_viewed', []);
-        // $lastFiveViewedIds = array_slice($storyIds, -5);
-        // $viewedStories = Story::whereIn('id', $lastFiveViewedIds)->get();
+        $postIds = session()->get('recently_viewed', []);
+        $lastFiveViewedIds = array_slice($postIds, -5);
+        $viewedPosts = Post::whereIn('id', $lastFiveViewedIds)->where('hide', false)->get();
 
         view()->share([
             'siteSetting' => $siteSetting,
+            'tags' => $tags,
+            'viewedPosts' => $viewedPosts,
         ]);
 
         return $next($request);

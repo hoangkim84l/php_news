@@ -10,12 +10,12 @@
                   </div>
                   <div class="widget-content">
                         <div class="ticker-items">
-                              @foreach ($trendingStories as $index => $trendingStory)
+                              @foreach ($trendingPosts as $index => $threadTrending)
                               <div class="ticker-item item-{{ $index }}">
                                     <h2 class="entry-title">
-                                          <a href="{{ route('show-truyen', ['truyen' => $trendingStory->slug]) }}"
-                                                title="{{ $trendingStory->site_title }}">
-                                                {{ $trendingStory->name }}
+                                          <a href="{{ route('show-thread', ['thread' => $threadTrending->slug]) }}"
+                                                title="{{ $threadTrending->site_title }}">
+                                                {{ $threadTrending->name }}
                                           </a>
                                     </h2>
                               </div>
@@ -31,25 +31,25 @@
             <div class="widget PopularPosts" data-version="2" id="PopularPosts3">
                   <div class="widget-content">
                         <div class="featured-items">
-                              @foreach ($storiesNew as $index => $storyNew)
+                              @foreach ($new3Posts as $index => $threadNew)
                               <div class="featured-item cs item-{{ $index }}">
                                     <a class="featured-inner"
-                                          href="{{ route('show-truyen', ['truyen' => $storyNew->slug]) }}"
-                                          title="{{ $storyNew->site_title }}">
+                                          href="{{ route('show-thread', ['thread' => $threadNew->slug]) }}"
+                                          title="{{ $threadNew->site_title }}">
                                           <span class="entry-image-wrap before-mask is-image">
                                                 <span class="entry-thumb"
-                                                      data-image="{{ asset('storage/upload/stories/' . $storyNew->image_link) }}"></span>
+                                                      data-image="{{ asset('storage/' . $threadNew->img_link) }}"></span>
                                           </span>
                                           <div class="entry-header entry-info">
                                                 <span class="entry-category">HOT</span>
-                                                <h2 class="entry-title">{{ $storyNew->name }}</h2>
+                                                <h2 class="entry-title">{{ $threadNew->name }}</h2>
                                                 <div class="entry-meta">
                                                       <span class="entry-author mi"><span
                                                                   class="sp">by</span><span
-                                                                  class="author-name">{{ $storyNew->author }}</span></span>
+                                                                  class="author-name">{{ $threadNew->author }}</span></span>
                                                       <span class="entry-time mi"><span
                                                                   class="sp">"</span><time class="published"
-                                                                  datetime="{{ $storyNew->created_at }}">{{ $storyNew->created_at }}</time></span>
+                                                                  datetime="{{ $threadNew->created_at }}">{{ $threadNew->created_at }}</time></span>
                                                 </div>
                                           </div>
                                     </a>
@@ -75,9 +75,9 @@
                                           <div class="block-left">
                                                 @foreach ($populars->slice(0, 1) as $index => $row)
                                                 <div class="block-item item-0">
-                                                      <a title="Khám phá Redis" class="entry-image-wrap is-image" href="{{ route('show-truyen', ['truyen' => $row->slug]) }}"><span class="entry-thumb lazy-ify" data-image="{{ asset('storage/upload/stories/' . $row->image_link) }}"></span></a>
+                                                      <a title="Khám phá Redis" class="entry-image-wrap is-image" href="{{ route('show-thread', ['thread' => $row->slug]) }}"><span class="entry-thumb lazy-ify" data-image="{{ asset('storage/' . $row->img_link) }}"></span></a>
                                                       <div class="entry-header">
-                                                      <h2 class="entry-title"><a href="{{ route('show-truyen', ['truyen' => $row->slug]) }}" title="{{ $row->site_title }}">{{ $row->name }}</a></h2>
+                                                      <h2 class="entry-title"><a href="{{ route('show-thread', ['thread' => $row->slug]) }}" title="{{ $row->site_title }}">{{ $row->name }}</a></h2>
                                                       <div class="entry-meta"><span class="entry-author mi"><span class="sp">by</span><span class="author-name">{{ $row->author }}</span></span><span class="entry-time mi"><span class="sp">•</span><time class="published" datetime="{{ $row->created_at }}">{{ $row->created_at }}</time></span></div>
                                                       </div>
                                                 </div>
@@ -85,11 +85,11 @@
                                           </div>
                                           <div class="block-right">
                                                 @foreach ($populars->slice(1, 3) as $index => $row)
-                                                <?php $imageUrl = asset('storage/upload/stories/' . $row->image_link); ?>
+                                                <?php $imageUrl = asset('storage/' . $row->img_link); ?>
                                                 <div class="block-item item-1">
-                                                      <a title="Một ngày trải nghiệm ở JUNO" class="entry-image-wrap is-image" href="{{ route('show-truyen', ['truyen' => $row->slug]) }}"><span class="entry-thumb lazy-ify" data-image="{{ asset('storage/upload/stories/' . $row->image_link) }}" style="background-image:url('{{ $imageUrl }}')"></span></a>
+                                                      <a title="Một ngày trải nghiệm ở JUNO" class="entry-image-wrap is-image" href="{{ route('show-thread', ['thread' => $row->slug]) }}"><span class="entry-thumb lazy-ify" data-image="{{ asset('storage/' . $row->img_link) }}" style="background-image:url('{{ $imageUrl }}')"></span></a>
                                                       <div class="entry-header">
-                                                      <h2 class="entry-title"><a href="{{ route('show-truyen', ['truyen' => $row->slug]) }}" title="{{ $row->site_title }}">{{ $row->name }}</a></h2>
+                                                      <h2 class="entry-title"><a href="{{ route('show-thread', ['thread' => $row->slug]) }}" title="{{ $row->site_title }}">{{ $row->name }}</a></h2>
                                                       <div class="entry-meta"><span class="entry-time mi"><time class="published" datetime="{{ $row->created_at }}">{{ $row->created_at }}</time></span></div>
                                                       </div>
                                                 </div>
@@ -104,12 +104,12 @@
                               </div>
                               <div class="widget-content">
                                     <div class="content-block grid-items">
-                                          @foreach ($highlight as $index => $row)
-                                          <?php $imageUrl = asset('storage/upload/stories/' . $row->image_link); ?>
+                                          @foreach ($highlight->posts as $index => $row)
+                                          <?php $imageUrl = asset('storage/' . $row->img_link); ?>
                                           <div class="grid-item item-{{ $index }}">
-                                                <a title="{{ $row->site_title }}" class="entry-image-wrap is-image" href="{{ route('show-truyen', ['truyen' => $row->slug]) }}"><span class="entry-thumb lazy-ify" data-image="{{ asset('storage/upload/stories/' . $row->image_link) }}" style="background-image:url('{{ $imageUrl }}')"></span></a>
+                                                <a title="{{ $row->site_title }}" class="entry-image-wrap is-image" href="{{ route('show-thread', ['thread' => $row->slug]) }}"><span class="entry-thumb lazy-ify" data-image="{{ asset('storage/' . $row->img_link) }}" style="background-image:url('{{ $imageUrl }}')"></span></a>
                                                 <div class="entry-header">
-                                                      <h2 class="entry-title"><a title="{{ $row->site_title }}" href="{{ route('show-truyen', ['truyen' => $row->slug]) }}">{{ $row->name }}</a></h2>
+                                                      <h2 class="entry-title"><a title="{{ $row->site_title }}" href="{{ route('show-thread', ['thread' => $row->slug]) }}">{{ $row->name }}</a></h2>
                                                       <div class="entry-meta"><span class="entry-time mi"><time class="published" datetime="{{ $row->created_at }}">{{ $row->created_at }}</time></span></div>
                                                 </div>
                                           </div>
@@ -123,33 +123,33 @@
                               <div class="blog-posts-wrap">
                                     <div class="title-wrap bp-title">
                                           <h3 class="title">Xem Thêm</h3><a class="wt-l"
-                                                href="{{ route('truyen') }}">Xem tất cả</a>
+                                                href="{{ route('thread') }}">Xem tất cả</a>
                                     </div>
                                     <div class="blog-posts hfeed index-post-wrap">
-                                          @foreach ($populars->slice(4) as $index => $storyView)
+                                          @foreach ($populars->slice(4) as $index => $threadPopular)
                                           @php 
-                                          $cleanText = strip_tags($storyView->description);
+                                          $cleanText = strip_tags($threadPopular->content);
                                           $shortDescription = substr($cleanText, 0, 200);
                                           @endphp
                                           <article class="blog-post hentry index-post post-{{ $index }}">
                                                 <a class="entry-image-wrap is-image"
-                                                      href="{{ route('show-truyen', ['truyen' => $storyView->slug]) }}"
-                                                      title="{{ $storyView->site_title }}"><span class="entry-thumb"
-                                                            data-image="{{ asset('storage/upload/stories/' . $storyView->image_link) }}"></span>
+                                                      href="{{ route('show-thread', ['thread' => $threadPopular->slug]) }}"
+                                                      title="{{ $threadPopular->site_title }}"><span class="entry-thumb"
+                                                            data-image="{{ asset('storage/' . $threadPopular->img_link) }}"></span>
                                                 </a>
                                                 <div class="entry-header">
                                                       <h2 class="entry-title"><a class="entry-title-link"
-                                                                  href="{{ route('show-truyen', ['truyen' => $storyView->slug]) }}"
-                                                                  rel="bookmark" title="{{ $storyView->site_title }}">{{ $storyView->name }}</a></h2>
+                                                                  href="{{ route('show-thread', ['thread' => $threadPopular->slug]) }}"
+                                                                  rel="bookmark" title="{{ $threadPopular->site_title }}">{{ $threadPopular->name }}</a></h2>
                                                       <p class="entry-excerpt excerpt">{!! $shortDescription !!} ...</p>
                                                       <div class="entry-meta">
                                                             <span class="entry-author mi"><span
                                                                         class="by sp">by</span><span
-                                                                        class="author-name">{{ $storyView->author }}</span></span>
+                                                                        class="author-name">{{ $threadPopular->author }}</span></span>
                                                             <span class="entry-time mi"><span
                                                                         class="sp">"</span><time
                                                                         class="published"
-                                                                        datetime="{{ $storyView->created_at }}">{{ $storyView->created_at }}</time></span>
+                                                                        datetime="{{ $threadPopular->created_at }}">{{ $threadPopular->created_at }}</time></span>
                                                       </div>
                                                 </div>
                                           </article>
@@ -159,7 +159,7 @@
                               <div class="blog-pager" id="blog-pager">
                                     <a class="blog-pager-older-link load-more btn"
                                           data-load=""
-                                          href="{{ route('truyen') }}" id="litespot-pro-load-more-link">
+                                          href="{{ route('thread') }}" id="litespot-pro-load-more-link">
                                           Xem thêm
                                     </a>
                                     <span class="loading">
@@ -218,15 +218,15 @@
                         </div>
                         <div class="widget PopularPosts" data-version="2" id="PopularPosts2">
                               <div class="widget-title title-wrap">
-                                    <h3 class="title">Chap Mới</h3>
+                                    <h3 class="title">Thread Mới</h3>
                               </div>
                               <div class="widget-content default-items">
-                                    @foreach ($phoBien as $index => $row)
+                                    @foreach ($phoBienMoiPost as $index => $row)
                                     <div class="default-item ds item-{{ $index }}">
                                           <div class="entry-header">
                                                 <h2 class="entry-title"><a
-                                                            href="{{ route('chapter-detail', ['truyen' => $row->slug, 'chuong' => $row->slug]) }}"
-                                                            title="{{ $row->site_title }}">{{ $row->story->name }} - {{ $row->name }}</a></h2>
+                                                            href="{{ route('show-thread', ['thread' => $row->slug]) }}"
+                                                            title="{{ $row->site_title }}">{{ $row->name }}</a></h2>
                                                 <div class="entry-meta"><span class="entry-time mi"><time
                                                                   class="published"
                                                                   datetime="{{ $row->created_at }}">{{ $row->created_at }}</time></span>

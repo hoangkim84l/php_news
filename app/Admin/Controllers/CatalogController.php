@@ -33,9 +33,7 @@ class CatalogController extends AdminController
         $grid->column('site_title', __('Site title'));
         $grid->column('site_keys', __('Site keys'));
         $grid->column('site_description', __('Site description'));
-        $grid->column('content', __('Content'));
         $grid->column('hide', __('Hide'));
-        $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
         return $grid;
@@ -76,12 +74,11 @@ class CatalogController extends AdminController
         $form = new Form(new Catalog());
 
         $form->text('name', __('Name'));
-        $form->text('slug', __('Slug'));
-        $form->text('img_link', __('Img link'));
+        $form->image('img_link', __('Img link'))->move('upload/catalog')->removable();
         $form->textarea('site_title', __('Site title'));
         $form->textarea('site_keys', __('Site keys'));
         $form->textarea('site_description', __('Site description'));
-        $form->textarea('content', __('Content'));
+        $form->ckeditor('content', __('Content'));
         $form->switch('hide', __('Hide'));
 
         return $form;

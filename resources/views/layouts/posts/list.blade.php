@@ -10,21 +10,21 @@
                <div class="widget Blog" data-version="2" id="Blog1">
                   <div class="blog-posts-wrap">
                      <div class="blog-posts hfeed index-post-wrap">
-                        @foreach ($storiesNew as $index => $storyNew)
+                        @foreach ($posts as $index => $threadNew)
                         @php 
-                        $cleanText = strip_tags($storyNew->description);
+                        $cleanText = strip_tags($threadNew->content);
                         $shortDescription = substr($cleanText, 0, 200);
                         @endphp
-                        <?php $imageUrl = asset('storage/upload/stories/' . $storyNew->image_link); ?>
+                        <?php $imageUrl = asset('storage/' . $threadNew->img_link); ?>
                         <article class="blog-post hentry index-post post-{{ $index }}">
-                           <a class="entry-image-wrap is-image" href="{{ route('show-truyen', ['truyen' => $storyNew->slug]) }}" title="Khám phá Redis"><span class="entry-thumb lazy-ify" data-image="{{ asset('storage/upload/stories/' . $storyNew->image_link) }}" style="background-image:url('{{ $imageUrl }}')"></span>
+                           <a class="entry-image-wrap is-image" href="{{ route('show-thread', ['thread' => $threadNew->slug]) }}" title="Khám phá Redis"><span class="entry-thumb lazy-ify" data-image="{{ asset('storage/' . $threadNew->img_link) }}" style="background-image:url('{{ $imageUrl }}')"></span>
                            </a>
                            <div class="entry-header">
-                              <h2 class="entry-title"><a class="entry-title-link" href="{{ route('show-truyen', ['truyen' => $storyNew->slug]) }}" rel="bookmark" title="Khám phá Redis">{{ $storyNew->name }}</a></h2>
+                              <h2 class="entry-title"><a class="entry-title-link" href="{{ route('show-thread', ['thread' => $threadNew->slug]) }}" rel="bookmark" title="Khám phá Redis">{{ $threadNew->name }}</a></h2>
                               <p class="entry-excerpt excerpt">{!! $shortDescription !!} …</p>
                               <div class="entry-meta">
-                                 <span class="entry-author mi"><span class="by sp">by</span><span class="author-name">{{ $storyNew->author }}</span></span>
-                                 <span class="entry-time mi"><span class="sp">•</span><time class="published" datetime="{{ $storyNew->created_at }}">{{ $storyNew->created_at }}</time></span>
+                                 <span class="entry-author mi"><span class="by sp">by</span><span class="author-name">{{ $threadNew->author }}</span></span>
+                                 <span class="entry-time mi"><span class="sp">•</span><time class="published" datetime="{{ $threadNew->created_at }}">{{ $threadNew->created_at }}</time></span>
                               </div>
                            </div>
                         </article>
@@ -32,7 +32,7 @@
                      </div>
                   </div>
                   <div class="blog-pager" id="blog-pager">
-                     <a class="blog-pager-older-link load-more btn" data-load="{{ $storiesNew->nextPageUrl() }}" href="javascript:;" id="litespot-pro-load-more-link2">
+                     <a class="blog-pager-older-link load-more btn" data-load="{{ $posts->nextPageUrl() }}" href="javascript:;" id="litespot-pro-load-more-link2">
                      Xem Thêm
                      </a>
                      <span class="loading">
@@ -65,7 +65,7 @@
                      </ul>
                   </div>
                </div>
-               @include('layouts.story-recent')
+               @include('layouts.post-recent')
                @include('layouts.tags')
             </div>
          </div>

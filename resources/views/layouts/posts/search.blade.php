@@ -13,17 +13,17 @@
                         <span class="query-info query-success">"{{ $tag }}"</span>
                      </div>
                      <div class="blog-posts hfeed index-post-wrap">
-                        @foreach($stories as $index => $row)
+                        @foreach($posts as $index => $row)
                         @php 
-                        $cleanText = strip_tags($row->description);
+                        $cleanText = strip_tags($row->content);
                         $shortDescription = substr($cleanText, 0, 200);
                         @endphp
-                        <?php $imageUrl = asset('storage/upload/stories/' . $row->image_link); ?>
+                        <?php $imageUrl = asset('storage/' . $row->img_link); ?>
                         <article class="blog-post hentry index-post post-0">
-                           <a class="entry-image-wrap is-image" href="{{ route('show-truyen', ['truyen' => $row->slug]) }}" title="{{ $row->site_title }}"><span class="entry-thumb lazy-ify" data-image="{{ asset('storage/upload/stories/' . $row->image_link) }}" style="background-image:url('{{ $imageUrl }}')"></span>
+                           <a class="entry-image-wrap is-image" href="{{ route('show-thread', ['thread' => $row->slug]) }}" title="{{ $row->site_title }}"><span class="entry-thumb lazy-ify" data-image="{{ asset('storage/' . $row->image_link) }}" style="background-image:url('{{ $imageUrl }}')"></span>
                            </a>
                            <div class="entry-header">
-                              <h2 class="entry-title"><a class="entry-title-link" href="{{ route('show-truyen', ['truyen' => $row->slug]) }}" rel="bookmark" title="{{ $row->site_title }}">{{ $row->name }}</a></h2>
+                              <h2 class="entry-title"><a class="entry-title-link" href="{{ route('show-thread', ['thread' => $row->slug]) }}" rel="bookmark" title="{{ $row->site_title }}">{{ $row->name }}</a></h2>
                               <p class="entry-excerpt excerpt">{{ $shortDescription }} …</p>
                               <div class="entry-meta">
                                  <span class="entry-author mi"><span class="by sp">by</span><span class="author-name">{{ $row->author }}</span></span>
@@ -62,7 +62,7 @@
                      </ul>
                   </div>
                </div>
-               @include('layouts.story-recent')
+               @include('layouts.post-recent')
                @include('layouts.tags')
             </div>
          </div>

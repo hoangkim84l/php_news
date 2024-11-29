@@ -19,9 +19,9 @@ Route::group([
 
     $router->get('/', 'HomeController@index')->name('home');
 
-    $router->resource('cafe/posts', PostController::class);
-    $router->resource('cafe/catalogs', CatalogController::class);
-    $router->resource('cafe/core-configs', CoreConfigController::class);
-    $router->resource('cafe/post-comments', PostCommentController::class);
+    $router->resource('review/posts', PostController::class);
+    $router->resource('review/catalogs', CatalogController::class);
+    $router->resource('review/core-configs', CoreConfigController::class);
+    $router->resource('review/post-comments', PostCommentController::class);
 
 });

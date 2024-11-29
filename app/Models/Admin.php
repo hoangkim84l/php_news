@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Catalog extends Model
+class Admin extends Model
 {
+    protected $table = 'admin_users';
+
     use HasFactory;
 
     /**
@@ -17,14 +17,8 @@ class Catalog extends Model
      * @var array<int, string>
      */
     protected $fillable = [
+        'username',
         'name',
-        'slug',
-        'img_link',
-        'site_title',
-        'site_keys',
-        'site_description',
-        'content',
-        'hide',
     ];
 
     /**
@@ -40,9 +34,4 @@ class Catalog extends Model
      * @var array<string, string>
      */
     protected $casts = [];
-
-    public function posts(): BelongsToMany
-    {
-        return $this->belongsToMany(Post::class, 'catalog_posts');
-    }
 }

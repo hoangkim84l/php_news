@@ -10,6 +10,7 @@ class CatalogController extends Controller
     public function show(string $slug)
     {
         $catalog = Catalog::where('slug', $slug)->first();
-        return view('layouts.stories.catalog', compact('catalog'));
+        $catalog = $catalog->load('posts');
+        return view('layouts.catalogs.list', compact('catalog'));
     }
 }

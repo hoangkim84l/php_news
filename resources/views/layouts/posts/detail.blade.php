@@ -10,17 +10,17 @@
                <div class="widget Blog" data-version="2" id="Blog1">
                   <div class="blog-posts hfeed item-post-wrap">
                      <article class="blog-post hentry item-post">
-                        <script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","mainEntityOfPage":{"@type":"WebPage","@id":"{{ route('show-truyen', ['truyen' => $story->slug]) }}"},"headline":"{{ $story->name }}","description":"{{ $story->name }}","datePublished":"2021-03-31T14:56:00+07:00","dateModified":"2024-09-29T22:11:52+07:00","image":{"@type":"ImageObject","url":"{{ asset('storage/upload/stories/' . $story->image_link) }}","height":675,"width":1200},"author":{"@type":"Person","name":"{{ $story->author }}"},"publisher":{"@type":"Organization","name":"Blogger","logo":{"@type":"ImageObject","url":"{{ asset('storage/upload/stories/' . $story->image_link) }}","width":206,"height":60}}}</script>
+                        <script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","mainEntityOfPage":{"@type":"WebPage","@id":"{{ route('show-thread', ['thread' => $post->slug]) }}"},"headline":"{{ $post->name }}","description":"{{ $post->name }}","datePublished":"2021-03-31T14:56:00+07:00","dateModified":"2024-09-29T22:11:52+07:00","image":{"@type":"ImageObject","url":"{{ asset('storage/' . $post->img_link) }}","height":675,"width":1200},"author":{"@type":"Person","name":"{{ $post->author }}"},"publisher":{"@type":"Organization","name":"Blogger","logo":{"@type":"ImageObject","url":"{{ asset('storage/' . $post->img_link) }}","width":206,"height":60}}}</script>
                         <div class="item-post-inner">
                            <div class="entry-header blog-entry-header p-eh has-meta">
-                              <nav id="breadcrumb"><a class="home" href="{{ URL::to('/') }}">Trang Chủ</a><em class="delimiter"></em><a class="label" href="{{ route('truyen') }}">Truyện/Manga</a></nav>
-                              <script type="application/ld+json">{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"{{ URL::to('/') }}"},{"@type":"ListItem","position":2,"name":"Truyện/Manga","item":"{{ route('truyen') }}"},{"@type":"ListItem","position":3,"name":"{{ $story->name }}","item":"{{ route('show-truyen', ['truyen' => $story->slug]) }}"}]}</script>
-                              <h1 class="entry-title">{{ $story->name }}</h1>
+                              <nav id="breadcrumb"><a class="home" href="{{ URL::to('/') }}">Trang Chủ</a><em class="delimiter"></em><a class="label" href="{{ route('thread') }}">Thread</a></nav>
+                              <script type="application/ld+json">{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"{{ URL::to('/') }}"},{"@type":"ListItem","position":2,"name":"Thread","item":"{{ route('thread') }}"},{"@type":"ListItem","position":3,"name":"{{ $post->name }}","item":"{{ route('show-thread', ['thread' => $post->slug]) }}"}]}</script>
+                              <h1 class="entry-title">{{ $post->name }}</h1>
                               <div class="entry-meta">
                                  <div class="align-left">
-                                    <?php $imageUrl = asset('storage/upload/stories/' . $story->image_link); ?>
-                                    <span class="entry-author mi"><span class="author-avatar-wrap"><span class="author-avatar lazy-ify" data-image="{{ asset('storage/upload/stories/' . $story->image_link) }}" style="background-image:url('{{ $imageUrl }}')"></span></span><span class="by sp">by</span><span class="author-name">{{ $story->author }}</span></span>
-                                    <span class="entry-time mi"><span class="sp">•</span><time class="published" datetime="{{ $story->created_at }}">{{ $story->created_at }}</time></span>
+                                    <?php $imageUrl = asset('storage/' . $post->img_link); ?>
+                                    <span class="entry-author mi"><span class="author-avatar-wrap"><span class="author-avatar lazy-ify" data-image="{{ asset('storage/' . $post->img_link) }}" style="background-image:url('{{ $imageUrl }}')"></span></span><span class="by sp">by</span><span class="author-name">{{ $post->author }}</span></span>
+                                    <span class="entry-time mi"><span class="sp">•</span><time class="published" datetime="{{ $post->created_at }}">{{ $post->created_at }}</time></span>
                                  </div>
                                  <div class="align-right">
                                     <span class="entry-comments-link show">0</span>
@@ -29,22 +29,22 @@
                            </div>
                            <div class="entry-content-wrap">
                               <div class="post-body entry-content" id="post-body">
-                                 <h2 style="text-align: left;"><span style="font-family: Nunito; font-size: medium;">{{ $story->name }}</span></h2>
+                                 <h2 style="text-align: left;"><span style="font-family: Nunito; font-size: medium;">{{ $post->name }}</span></h2>
                                  <p><span style="font-family: Nunito; font-size: medium;"></span></p>
                                  <div class="separator" style="clear: both; text-align: center;">
                                     <span style="font-family: Nunito; font-size: medium;">
                                        <a href="#" style="margin-left: 1em; margin-right: 1em;">
-                                          <img alt="" data-original-height="194" data-original-width="259" height="240" loading="lazy" src="{{ asset('storage/upload/stories/' . $story->image_link) }}" width="320">
+                                          <img alt="" data-original-height="194" data-original-width="259" height="240" loading="lazy" src="{{ asset('storage/' . $post->img_link) }}" width="320">
                                        </a>
                                     </span>
                                  </div>
                                  <span style="font-family: Nunito; font-size: medium;"><br></span>
                                  <p></p>
-                                 {!! $story->description !!}
+                                 {!! $post->content !!}
                               </div>
                               <div class="entry-labels">
                                  <span class="labels-label">Tags:</span>
-                                 @foreach ($storyTags as $index => $tag)
+                                 @foreach ($postTags as $index => $tag)
                                  <a class="label-link" href="{{ route('show-danh-muc', ['slug' => $tag->slug]) }}" rel="tag">{{ $tag->name }}</a>
                                  @endforeach
                               </div>
@@ -64,7 +64,7 @@
                               </div>
                            </div>
                         </div>
-                        @include('layouts.story-related')
+                        <!-- include('layouts.post-related') -->
                      </article>
                      <div class="litespot-pro-blog-post-comments comments-system-blogger" data-shortcode="$type={blogger}" style="display: block;">
                         <a name="comments"></a>
@@ -79,7 +79,7 @@
                            </div>
                         </section>
                      </div>
-                  </div>
+                  </div>   
                </div>
             </div>
          </div>
@@ -103,23 +103,7 @@
                      </ul>
                   </div>
                </div>
-               <div class="widget PopularPosts" data-version="2" id="PopularPosts2">
-                  <div class="widget-title title-wrap">
-                     <h3 class="title">
-                        <a href="{{ route('show-chuong', ['truyen' => $story->slug]) }}">Danh Sách Chương</a>
-                     </h3>
-                  </div>
-                  <div class="widget-content default-items scroll-2">
-                     @foreach($chapters as $index => $chapter)
-                     <div class="default-item ds scroll-force-overflow item-{{ $index }}">
-                        <div class="entry-header">
-                           <h2 class="entry-title"><a href="{{ route('chapter-detail', ['truyen' => $story->slug, 'chuong' => $chapter->slug]) }}" title="{{ $chapter->site_title }}">{{ $chapter->name }}</a></h2>
-                           <div class="entry-meta"><span class="entry-time mi"><time class="published" datetime="{{ $chapter->created_at }}">{{ $chapter->created_at }}</time></span></div>
-                        </div>
-                     </div>
-                     @endforeach
-                  </div>
-               </div>
+               @include('layouts.post-related')
                @include('layouts.tags')
             </div>
          </div>

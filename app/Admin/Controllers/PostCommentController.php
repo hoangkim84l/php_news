@@ -67,7 +67,7 @@ class PostCommentController extends AdminController
 
         $form->number('post_id', __('Post id'));
         $form->number('user_id', __('User id'));
-        $form->textarea('comment', __('Comment'));
+        $form->ckeditor('comment', __('Comment'));
 
         return $form;
     }

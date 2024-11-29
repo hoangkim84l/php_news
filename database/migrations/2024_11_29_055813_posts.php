@@ -15,14 +15,16 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->string('img_link');
+            $table->string('img_link')->nullable();
             $table->text('site_title');
             $table->text('site_keys');
             $table->text('site_description');
             $table->text('content');
             $table->integer('view');
+            $table->string('author');
             $table->tinyInteger('hide');
             $table->timestamps();
+            $table->index(['name', 'site_title', 'site_keys', 'site_description']);
         });
     }
 

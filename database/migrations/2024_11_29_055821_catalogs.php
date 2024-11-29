@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('slug');
-            $table->string('img_link');
+            $table->string('img_link')->nullable();
             $table->text('site_title');
             $table->text('site_keys');
             $table->text('site_description');

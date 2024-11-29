@@ -2,6 +2,8 @@
 
 namespace App\Admin\Controllers;
 
+use App\Models\Admin;
+use App\Models\Catalog;
 use App\Models\Post;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
@@ -33,11 +35,9 @@ class PostController extends AdminController
         $grid->column('site_title', __('Site title'));
         $grid->column('site_keys', __('Site keys'));
         $grid->column('site_description', __('Site description'));
-        $grid->column('content', __('Content'));
         $grid->column('view', __('View'));
         $grid->column('hide', __('Hide'));
         $grid->column('created_at', __('Created at'));
-        $grid->column('updated_at', __('Updated at'));
 
         return $grid;
     }
@@ -78,14 +78,18 @@ class PostController extends AdminController
         $form = new Form(new Post());
 
         $form->text('name', __('Name'));
-        $form->text('slug', __('Slug'));
-        $form->text('img_link', __('Img link'));
+        $form->image('img_link', __('Img link'))->move('posts')->removable();
         $form->textarea('site_title', __('Site title'));
         $form->textarea('site_keys', __('Site keys'));
         $form->textarea('site_description', __('Site description'));
-        $form->textarea('content', __('Content'));
-        $form->number('view', __('View'));
+        $form->ckeditor('content', __('Content'));
+        $form->multipleSelect('catalogs', __('Catalog'))->options(Catalog::all()->pluck('name', 'id'));
+        $form->text('author', __('Author'));
+        $form->number('view', __('View'))->default(1);
         $form->switch('hide', __('Hide'));
+
+        // $form->image('image_link', __('Image link'))->move('upload/stories')->removable();
+        // $form->multipleSelect('category_id', __('Category'))->options(Catalog::all()->pluck('name', 'id'));
 
         return $form;
     }
