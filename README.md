@@ -1,23 +1,22 @@
-# php_news
-learn php 
+##### This Project For Collect Data
 
--- Table structure for table `products`
-CREATE TABLE IF NOT EXISTS `products` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(32) NOT NULL,
-  `description` text NOT NULL,
-  `price` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  `created` datetime NOT NULL,
-  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=0 ;
+- composer install
+- php artisan key:generate
+- php artisan storage:link (one time run)
+- php artisan serve
 
--- Table structure for table `categories`
-CREATE TABLE IF NOT EXISTS `categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(256) NOT NULL,
-  `created` datetime NOT NULL,
-  `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0 ;
+`https://resources.blogblog.com/img/blank.gif` empty image
+
+
+
+-----
+Dùng package này để tạo trang admin: ```composer require encore/laravel-admin --with-all-dependencies```
+
+One time import
+```php artisan vendor:publish --provider="Encore\Admin\AdminServiceProvider"```
+```php artisan admin:install```
+
+admin/admin
+1. ```php artisan admin:controller App\\Models\\Story``` <<< Sử dụng lệnh sau để tạo Controller cho App\Story
+2. Trong app/Admin/routes.php ```$router->resource('demo/stories', StoryController::class);``` <<< Sử  dụng lệnh này để thêm routes
+3. Truy cập ```{{url}}/admin/auth/menu``` để cấu hình menu
