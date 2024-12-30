@@ -1,0 +1,12 @@
+# Group 1
+User-agent: Googlebot
+Disallow: 	https://scontent.xx.fbcdn.net/hads-ak-prn2/1487645_6012475414660_1439393861_n.png
+Disallow: 	/public/fonts/
+Disallow: 	/public/vendor/
+Disallow: 	/public/webfonts/
+
+# Group 2
+User-agent: *
+Allow: /
+
+Sitemap: https://trangdo.one/sitemap.xml

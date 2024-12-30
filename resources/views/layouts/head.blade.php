@@ -6,6 +6,7 @@
 <link href="{{ asset('storage/upload/favicon.ico') }}" rel="icon" type="image/x-icon">
 <meta content="#1A73E8" name="theme-color">
 <link href="{{ URL::to('/') }}" rel="canonical">
+<link href="{{ url()->current() }}" rel="canonical">
 <meta content="{{ $siteSetting->site_title }}" name="description">
 <link href="https://blogger.googleusercontent.com/img/a/AVvXsEies13i6Hi4_xHRsR0o0-xvEgxt3Gkcy2VzLONCeQnjHfxepFv6i4flPtDeJWUehL0BqYtdM-OcwKDUO0cc2Fz45484GJ28FEMNqfO9XaSK-Cmz9fQ3Ucdgb9ShNV7wvMcHoomi6Yg6mdxX9Q89ywq5_L28e3WSC8sTLT3IXFW5uZX9rMOgQiKMYwX65Zc=w1600"
     rel="image_src">
