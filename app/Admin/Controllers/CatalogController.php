@@ -47,7 +47,7 @@ class CatalogController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(Catalog::findOrFail($id));
+        $show = new Show(Catalog::query()->findOrFail($id));
 
         $show->field('id', __('Id'));
         $show->field('name', __('Name'));
@@ -78,6 +78,7 @@ class CatalogController extends AdminController
         $form->textarea('site_title', __('Site title'));
         $form->textarea('site_keys', __('Site keys'));
         $form->textarea('site_description', __('Site description'));
+        // @phpstan-ignore-next-line
         $form->ckeditor('content', __('Content'));
         $form->switch('hide', __('Hide'));
 

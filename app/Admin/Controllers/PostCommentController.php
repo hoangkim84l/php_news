@@ -44,7 +44,7 @@ class PostCommentController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(PostComment::findOrFail($id));
+        $show = new Show(PostComment::query()->findOrFail($id));
 
         $show->field('id', __('Id'));
         $show->field('post_id', __('Post id'));
@@ -67,6 +67,7 @@ class PostCommentController extends AdminController
 
         $form->number('post_id', __('Post id'));
         $form->number('user_id', __('User id'));
+        // @phpstan-ignore-next-line
         $form->ckeditor('comment', __('Comment'));
 
         return $form;

@@ -47,7 +47,7 @@ class CoreConfigController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(CoreConfig::findOrFail($id));
+        $show = new Show(CoreConfig::query()->findOrFail($id));
 
         $show->field('id', __('Id'));
         $show->field('site_name', __('Site name'));

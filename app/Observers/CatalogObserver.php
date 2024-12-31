@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Observers;
 
 use App\Models\Catalog;
@@ -8,12 +9,14 @@ class CatalogObserver
 {
     public function creating(Catalog $catalog)
     {
-        $catalog->slug = Str::slug($catalog->name);
+        if (isset($catalog->name)) {
+            $catalog->slug = Str::slug($catalog->name);
+        }
     }
 
     public function updating(Catalog $catalog)
     {
-        if ($catalog->isDirty('name')) {
+        if (isset($catalog->name) && $catalog->isDirty('name')) {
             $catalog->slug = Str::slug($catalog->name);
         }
     }

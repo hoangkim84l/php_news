@@ -77,8 +77,8 @@
                                                 <div class="block-item item-0">
                                                       <a title="Khám phá Redis" class="entry-image-wrap is-image" href="{{ route('show-thread', ['thread' => $row->slug]) }}"><span class="entry-thumb lazy-ify" data-image="{{ asset('storage/' . $row->img_link) }}"></span></a>
                                                       <div class="entry-header">
-                                                      <h2 class="entry-title"><a href="{{ route('show-thread', ['thread' => $row->slug]) }}" title="{{ $row->site_title }}">{{ $row->name }}</a></h2>
-                                                      <div class="entry-meta"><span class="entry-author mi"><span class="sp">by</span><span class="author-name">{{ $row->author }}</span></span><span class="entry-time mi"><span class="sp">•</span><time class="published" datetime="{{ $row->created_at }}">{{ $row->created_at }}</time></span></div>
+                                                            <h2 class="entry-title"><a href="{{ route('show-thread', ['thread' => $row->slug]) }}" title="{{ $row->site_title }}">{{ $row->name }}</a></h2>
+                                                            <div class="entry-meta"><span class="entry-author mi"><span class="sp">by</span><span class="author-name">{{ $row->author }}</span></span><span class="entry-time mi"><span class="sp">•</span><time class="published" datetime="{{ $row->created_at }}">{{ $row->created_at }}</time></span></div>
                                                       </div>
                                                 </div>
                                                 @endforeach
@@ -89,8 +89,8 @@
                                                 <div class="block-item item-1">
                                                       <a title="Một ngày trải nghiệm ở JUNO" class="entry-image-wrap is-image" href="{{ route('show-thread', ['thread' => $row->slug]) }}"><span class="entry-thumb lazy-ify" data-image="{{ asset('storage/' . $row->img_link) }}" style="background-image:url('{{ $imageUrl }}')"></span></a>
                                                       <div class="entry-header">
-                                                      <h2 class="entry-title"><a href="{{ route('show-thread', ['thread' => $row->slug]) }}" title="{{ $row->site_title }}">{{ $row->name }}</a></h2>
-                                                      <div class="entry-meta"><span class="entry-time mi"><time class="published" datetime="{{ $row->created_at }}">{{ $row->created_at }}</time></span></div>
+                                                            <h2 class="entry-title"><a href="{{ route('show-thread', ['thread' => $row->slug]) }}" title="{{ $row->site_title }}">{{ $row->name }}</a></h2>
+                                                            <div class="entry-meta"><span class="entry-time mi"><time class="published" datetime="{{ $row->created_at }}">{{ $row->created_at }}</time></span></div>
                                                       </div>
                                                 </div>
                                                 @endforeach
@@ -127,7 +127,7 @@
                                     </div>
                                     <div class="blog-posts hfeed index-post-wrap">
                                           @foreach ($populars->slice(4) as $index => $threadPopular)
-                                          @php 
+                                          @php
                                           $cleanText = strip_tags($threadPopular->content);
                                           $shortDescription = substr($cleanText, 0, 200);
                                           @endphp
