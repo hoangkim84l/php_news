@@ -1,0 +1,31 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ develop ] # production
+  pull_request:
+    branches: [ develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+
+      - name: Copy .env
+        run: cp .env.test .env
+
+      - name: Install app
+        run: composer install
+
+      - name: Test PHP Stan
+        run: ./vendor/bin/phpstan analyse
+
+      - name: Test PHP Unit
+        run: ./vendor/bin/phpunit
