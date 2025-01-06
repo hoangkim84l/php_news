@@ -2,9 +2,9 @@ name: CI/CD
 
 on:
   push:
-    branches: [ develop ] # production
+    branches: [ production ]
   pull_request:
-    branches: [ develop ]
+    branches: [ production ]
 
 jobs:
   build:
@@ -19,7 +19,7 @@ jobs:
           php-version: 8.2
 
       - name: Copy .env
-        run: cp .env.test .env
+        run: cp .env.example .env
 
       - name: Install app
         run: composer install
@@ -27,32 +27,11 @@ jobs:
       - name: Test PHP Stan
         run: ./vendor/bin/phpstan analyse
 
-      - name: Test PHP Unit
-        run: ./vendor/bin/phpunit
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v2
-  #       with:
-  #         token: ${{ secrets.PUSH_TOKEN }}
-  #     - name: Set up Node
-  #       uses: actions/setup-node@v1
-  #       with:
-  #         node-version: '16'
-  #     - run: npm install
-  #     - run: npm run production
-  #     - name: Commit built assets
-  #       run: |
-  #         git config --local user.email "vpduy84@gmail.com"
-  #         git config --local user.name "Duy Vo"
-  #         git checkout -B deploy
-  #         git add -f public/
-  #         git commit -m "Build front-end assets"
-  #         git push -f origin deploy
-  #     - name: Deploy to Production
-  #       uses: appleboy/ssh-action@master
-  #       with:
-  #         username: YOUR_USER_NAME
-  #         host: YOUR_HOSTNAME
-  #         password: ${{ secrets.SSH_PASSWORD}}
-  #         script: 'cd /var/www/html/trangdo.one && ./server_deploy.sh'
+      - name: Deploy to Production
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_HOST_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            'cd ${{ secrets.SSH_APP_PATH }} && ./server_deploy.sh'
