@@ -17,11 +17,11 @@ class SetGlobalData
     public function handle($request, Closure $next)
     {
         $tags = Catalog::query()->get();
-        $siteSetting = CoreConfig::find(1);
+        $siteSetting = CoreConfig::query()->find(1);
 
         $postIds = session()->get('recently_viewed', []);
         $lastFiveViewedIds = array_slice($postIds, -5);
-        $viewedPosts = Post::whereIn('id', $lastFiveViewedIds)->where('hide', false)->get();
+        $viewedPosts = Post::query()->whereIn('id', $lastFiveViewedIds)->where('hide', false)->get();
 
         view()->share([
             'siteSetting' => $siteSetting,

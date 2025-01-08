@@ -5,6 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int|null $post_id
+ * @property int|null $user_id
+ * @property string|null $comment
+ */
 class PostComment extends Model
 {
     use HasFactory;

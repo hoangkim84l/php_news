@@ -50,7 +50,7 @@ class PostController extends AdminController
      */
     protected function detail($id)
     {
-        $show = new Show(Post::findOrFail($id));
+        $show = new Show(Post::query()->findOrFail($id));
 
         $show->field('id', __('Id'));
         $show->field('name', __('Name'));
@@ -82,6 +82,7 @@ class PostController extends AdminController
         $form->textarea('site_title', __('Site title'));
         $form->textarea('site_keys', __('Site keys'));
         $form->textarea('site_description', __('Site description'));
+        // @phpstan-ignore-next-line
         $form->ckeditor('content', __('Content'));
         $form->multipleSelect('catalogs', __('Catalog'))->options(Catalog::all()->pluck('name', 'id'));
         $form->text('author', __('Author'));

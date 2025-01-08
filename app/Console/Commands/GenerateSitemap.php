@@ -29,7 +29,8 @@ class GenerateSitemap extends Command
     public function handle()
     {
         $postsitmap = Sitemap::create();
-        Post::get()->each(function (Post $post) use ($postsitmap) {
+        // @phpstan-ignore-next-line
+        Post::query()->get()->each(function (Post $post) use ($postsitmap) {
             $postsitmap->add(
                 Url::create("/post/{$post->slug}")
                     ->setPriority(0.9)

@@ -10,11 +10,65 @@
                <div class="widget Blog" data-version="2" id="Blog1">
                   <div class="blog-posts hfeed item-post-wrap">
                      <article class="blog-post hentry item-post">
-                        <script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","mainEntityOfPage":{"@type":"WebPage","@id":"{{ route('show-thread', ['thread' => $post->slug]) }}"},"headline":"{{ $post->name }}","description":"{{ $post->name }}","datePublished":"2021-03-31T14:56:00+07:00","dateModified":"2024-09-29T22:11:52+07:00","image":{"@type":"ImageObject","url":"{{ asset('storage/' . $post->img_link) }}","height":675,"width":1200},"author":{"@type":"Person","name":"{{ $post->author }}"},"publisher":{"@type":"Organization","name":"Blogger","logo":{"@type":"ImageObject","url":"{{ asset('storage/' . $post->img_link) }}","width":206,"height":60}}}</script>
+                        <script type="application/ld+json">
+                           {
+                              "@context": "https://schema.org",
+                              "@type": "NewsArticle",
+                              "mainEntityOfPage": {
+                                 "@type": "WebPage",
+                                 "@id": "{{ route('show-thread', ['thread' => $post->slug]) }}"
+                              },
+                              "headline": "{{ $post->name }}",
+                              "description": "{{ $post->name }}",
+                              "datePublished": "2021-03-31T14:56:00+07:00",
+                              "dateModified": "2024-09-29T22:11:52+07:00",
+                              "image": {
+                                 "@type": "ImageObject",
+                                 "url": "{{ asset('storage/' . $post->img_link) }}",
+                                 "height": 675,
+                                 "width": 1200
+                              },
+                              "author": {
+                                 "@type": "Person",
+                                 "name": "{{ $post->author }}"
+                              },
+                              "publisher": {
+                                 "@type": "Organization",
+                                 "name": "Blogger",
+                                 "logo": {
+                                    "@type": "ImageObject",
+                                    "url": "{{ asset('storage/' . $post->img_link) }}",
+                                    "width": 206,
+                                    "height": 60
+                                 }
+                              }
+                           }
+                        </script>
                         <div class="item-post-inner">
                            <div class="entry-header blog-entry-header p-eh has-meta">
                               <nav id="breadcrumb"><a class="home" href="{{ URL::to('/') }}">Trang Chủ</a><em class="delimiter"></em><a class="label" href="{{ route('thread') }}">Thread</a></nav>
-                              <script type="application/ld+json">{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"{{ URL::to('/') }}"},{"@type":"ListItem","position":2,"name":"Thread","item":"{{ route('thread') }}"},{"@type":"ListItem","position":3,"name":"{{ $post->name }}","item":"{{ route('show-thread', ['thread' => $post->slug]) }}"}]}</script>
+                              <script type="application/ld+json">
+                                 {
+                                    "@context": "http://schema.org",
+                                    "@type": "BreadcrumbList",
+                                    "itemListElement": [{
+                                       "@type": "ListItem",
+                                       "position": 1,
+                                       "name": "Home",
+                                       "item": "{{ URL::to('/') }}"
+                                    }, {
+                                       "@type": "ListItem",
+                                       "position": 2,
+                                       "name": "Thread",
+                                       "item": "{{ route('thread') }}"
+                                    }, {
+                                       "@type": "ListItem",
+                                       "position": 3,
+                                       "name": "{{ $post->name }}",
+                                       "item": "{{ route('show-thread', ['thread' => $post->slug]) }}"
+                                    }]
+                                 }
+                              </script>
                               <h1 class="entry-title">{{ $post->name }}</h1>
                               <div class="entry-meta">
                                  <div class="align-left">
@@ -69,17 +123,26 @@
                      <div class="litespot-pro-blog-post-comments comments-system-blogger" data-shortcode="$type={blogger}" style="display: block;">
                         <a name="comments"></a>
                         <div class="title-wrap comments-title">
-                           <h3 class="title">Post a Comment</h3>
+                           <h3 class="title">Bạn nghĩ sao về bài này:</h3>
                         </div>
-                        <section class="comments threaded no-comments" data-embed="true" data-num-comments="0" id="comments">
-                           <div class="comment-form">
-                              <a name="comment-form"></a>
-                              <a href="https://www.blogger.com/comment/frame/1207703353679584054?po=1458586028793057986&amp;hl=en&amp;skin=soho&amp;blogspotRpcToken=1200752" id="comment-editor-src" rel="noopener noreferrer" title="Comment Form Link"></a>
-                              <iframe allowtransparency="allowtransparency" class="blogger-iframe-colorize blogger-comment-from-post" frameborder="0" height="65px" id="comment-editor" name="comment-editor" src="https://www.blogger.com/comment/frame/1207703353679584054?po=1458586028793057986&amp;hl=en&amp;skin=soho&amp;blogspotRpcToken=1200752" width="100%" data-resized="true"></iframe>
+                        <form id="comment-form" action="{{ route('comments.store') }}" method="POST">
+                           @csrf
+                           <input type="hidden" name="post_id" value="{{ $post->id }}">
+                           <textarea class="window-ify input-comments" name="comments" placeholder="Viết bình luận"></textarea>
+                           <button class="linkedin btn window-ify btn-submit-form" type="submit">Gửi bình luận</button>
+                        </form>
+                        <section class="comments no-comments">
+                           <div class="comment-form scroll-2">
+                              @foreach ($post->comments as $data)
+                              <div class="data-comment">
+                                 {{ $data->comment }}
+                                 <p>By {{ $comment->user->name ?? 'Anonymous' }}</p>
+                              </div>
+                              @endforeach
                            </div>
                         </section>
                      </div>
-                  </div>   
+                  </div>
                </div>
             </div>
          </div>
@@ -111,3 +174,20 @@
    </div>
 </div>
 @endsection
+
+<script>
+   $(document).ready(function() {
+      $('#comment-form').submit(function(e) {
+         e.preventDefault();
+         $.ajax({
+            url: $(this).attr('action'),
+            type: 'POST',
+            data: $(this).serialize,
+            success: function(res) {
+               $('#comment-form').prepend('<div class="comment">' + res.comment + '</div>');
+               $('#comment-form')[0].reset();
+            },
+         });
+      });
+   });
+</script>

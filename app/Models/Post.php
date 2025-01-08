@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property string|null $slug
+ */
 class Post extends Model
 {
     use HasFactory;
@@ -44,7 +47,7 @@ class Post extends Model
 
     public function comments(): HasMany
     {
-        return $this->hasMany(PostComment::class, 'post_id');
+        return $this->hasMany(PostComment::class, 'post_id', 'id');
     }
 
     public function catalogs(): BelongsToMany

@@ -23,24 +23,26 @@ class PostController extends Controller
 
     public function show(string $slug)
     {
-        $post = Post::where('slug', $slug)->where('hide', false)->first();
+        $post = Post::query()->where('slug', $slug)->where('hide', false)->first();
         if (!$post) {
             return;
         }
         session()->push('recently_viewed', $post->id);
         $postTags = $post->catalogs;
-        $catalog = Catalog::find($post->catalogs()?->first()?->id);
+        $catalog = Catalog::query()->find($post->catalogs()?->first()?->id);
         $postsSameTag = $catalog?->load('posts');
 
         $post->view = $post->view + 1;
         $post->save();
+
+        $post->load('comments')->orderBy('id', 'desc');
         return view('layouts.posts.detail', compact('post', 'postTags', 'postsSameTag'));
     }
 
     public function search(Request $request)
     {
         $tag = $request->input('q');
-        $posts = Post::where('name', 'like', "%$tag%")->where('hide', false)->get();
+        $posts = Post::query()->where('name', 'like', "%$tag%")->where('hide', false)->get();
         return view('layouts.posts.search', compact('posts', 'tag'));
     }
 }

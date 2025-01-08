@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('author');
             $table->tinyInteger('hide');
             $table->timestamps();
-            $table->index(['name', 'site_title', 'site_keys', 'site_description']);
+            $table->index(['name']);
         });
     }
 

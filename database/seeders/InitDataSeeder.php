@@ -34,8 +34,15 @@ class InitDataSeeder extends Seeder
             'site_keys' => 'site keys',
             'site_description' => 'site description',
             'content' => 'This is content',
+            'author' => 'Duy',
             'view' => 1,
             'hide' => false,
+        ]);
+
+        DB::table('catalog_posts')->updateOrInsert([
+            'post_id' => 1,
+        ],[
+            'catalog_id' => 1,
         ]);
 
         DB::table('core_configs')->updateOrInsert([
