@@ -410,8 +410,13 @@ return [
 
             // Editor configuration
             'config' => [
-                // 'filebrowserUploadUrl' => env('APP_URL') . '/storage',
+                // 'filebrowserUploadUrl' => env('APP_URL') . '/upload_ckeditor.php',
             ]
-        ]
+        ],
+        'media-manager' => [
+            // Select a local disk that you configured in `config/filesystem.php`
+            'disk' => 'public',
+            'allowed_ext' => 'jpg,jpeg,png,pdf,doc,docx,zip'
+        ],
     ],
 ];
