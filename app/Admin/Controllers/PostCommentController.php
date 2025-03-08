@@ -32,7 +32,7 @@ class PostCommentController extends AdminController
         $grid->column('comment', __('Comment'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
-
+        $grid->model()->orderByDesc('created_at');
         return $grid;
     }
 

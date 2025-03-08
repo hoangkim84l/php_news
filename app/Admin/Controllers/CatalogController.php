@@ -35,7 +35,7 @@ class CatalogController extends AdminController
         $grid->column('site_description', __('Site description'));
         $grid->column('hide', __('Hide'));
         $grid->column('updated_at', __('Updated at'));
-
+        $grid->model()->orderByDesc('created_at');
         return $grid;
     }
 

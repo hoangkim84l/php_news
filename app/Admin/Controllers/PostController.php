@@ -38,7 +38,7 @@ class PostController extends AdminController
         $grid->column('view', __('View'));
         $grid->column('hide', __('Hide'));
         $grid->column('created_at', __('Created at'));
-
+        $grid->model()->orderByDesc('created_at');
         return $grid;
     }
 
