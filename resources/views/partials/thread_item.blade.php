@@ -1,4 +1,4 @@
-@foreach ($storiesNew as $index => $threadNew)
+@foreach ($posts as $index => $threadNew)
 @php
 $cleanText = strip_tags($threadNew->content);
 $shortDescription = substr($cleanText, 0, 200);

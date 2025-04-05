@@ -16,8 +16,14 @@ class HomeController extends Controller
         $categoriesAsTags = Catalog::query()->orderBy('id', 'desc')->get();
 
         $populars = Post::query()->orderBy('view', 'desc')->where('hide', false)->limit(14)->get();
-        $postHightLight = Catalog::query()->where('slug', 'highlight')->first();
-        $highlight = $postHightLight->load('posts');
+        $highlight = Catalog::query()
+        ->where('slug', 'highlight')
+        ->with(['posts' => function ($query) {
+            $query->orderBy('id', 'desc')->limit(6);
+        }])
+        ->first();
+
+
         $phoBienMoiPost = Post::query()->orderBy('id', 'desc')->where('hide', false)->limit(10)->get();
         return view('layouts.home.home', compact('trendingPosts', 'phoBienMoiPost', 'new3Posts', 'categoriesAsTags', 'populars', 'highlight'));
     }

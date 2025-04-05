@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
     public function index(Request $request) {
-        $posts = Post::query()->where('hide', false)->paginate();
+        $posts = Post::query()->orderBy('id', 'desc')->where('hide', false)->paginate();
         if ($request->ajax()) {
             // Trả về dữ liệu dạng JSON khi là yêu cầu AJAX
             return response()->json([
