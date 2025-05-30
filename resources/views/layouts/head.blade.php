@@ -5,7 +5,7 @@
 <meta content="blogger" name="generator">
 <link href="{{ asset('storage/upload/favicon.ico') }}" rel="icon" type="image/x-icon">
 <meta content="#1A73E8" name="theme-color">
-<link href="{{ URL::to('/') }}" rel="canonical">
+<!-- <link href="{{ URL::to('/') }}" rel="canonical"> -->
 <link href="{{ url()->current() }}" rel="canonical">
 <meta content="{{ $siteSetting->site_title }}" name="description">
 <link href="https://blogger.googleusercontent.com/img/a/AVvXsEies13i6Hi4_xHRsR0o0-xvEgxt3Gkcy2VzLONCeQnjHfxepFv6i4flPtDeJWUehL0BqYtdM-OcwKDUO0cc2Fz45484GJ28FEMNqfO9XaSK-Cmz9fQ3Ucdgb9ShNV7wvMcHoomi6Yg6mdxX9Q89ywq5_L28e3WSC8sTLT3IXFW5uZX9rMOgQiKMYwX65Zc=w1600"
@@ -25,9 +25,6 @@
 <meta content="{{ $siteSetting->site_title }}" name="twitter:title">
 <meta content="{{ $siteSetting->site_url }}" name="twitter:domain">
 <meta content="{{ $siteSetting->site_title }}" name="twitter:description">
-<!-- <link rel="alternate" type="application/atom+xml" title="Không Nên Tin - Atom" href="https://cafesuanovel.one/feeds/posts/default">
-<link rel="alternate" type="application/rss+xml" title="Không Nên Tin - RSS" href="https://cafesuanovel.one/feeds/posts/default?alt=rss">
-<link rel="service.post" type="application/atom+xml" title="Không Nên Tin - Atom" href="https://NUTSDFDVkh4X.com/feeds/1207703353679584054/posts/default">
 -->
 <!-- Font Awesome Free 5.15.2 -->
 <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/fontawesome.min.css' rel='stylesheet' />

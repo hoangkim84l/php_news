@@ -16,7 +16,7 @@
                               "@type": "NewsArticle",
                               "mainEntityOfPage": {
                                  "@type": "WebPage",
-                                 "@id": "{{ route('show-thread', ['thread' => $post->slug]) }}"
+                                 "@id": "{{ url()->current() }}"
                               },
                               "headline": "{{ $post->name }}",
                               "description": "{{ $post->name }}",
@@ -65,7 +65,7 @@
                                        "@type": "ListItem",
                                        "position": 3,
                                        "name": "{{ $post->name }}",
-                                       "item": "{{ route('show-thread', ['thread' => $post->slug]) }}"
+                                       "item": "{{ url()->current() }}"
                                     }]
                                  }
                               </script>

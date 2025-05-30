@@ -32,7 +32,7 @@
                      </div>
                   </div>
                   <div class="blog-pager" id="blog-pager">
-                     <a class="blog-pager-older-link load-more btn" data-load="https://thaygivietdo.blogspot.com/search?updated-max=2024-09-28T21:59:00%2B07:00&amp;max-results=20&amp;start=12&amp;by-date=false" href="javascript:;" id="litespot-pro-load-more-link">
+                     <a class="blog-pager-older-link load-more btn" data-load="" href="javascript:;" id="litespot-pro-load-more-link">
                      Xem thêm
                      </a>
                      <span class="loading">
