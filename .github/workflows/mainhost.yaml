@@ -1,37 +1,74 @@
-name: CI/CD
+name: CI/CD - Deploy
 
 on:
   push:
-    branches: [ production ]
-  pull_request:
-    branches: [ production ]
+    branches:
+      - production
 
 jobs:
-  build:
+  deploy:
+    name: Deploy via SSH
     runs-on: ubuntu-latest
+    environment: production
+
     steps:
-      - name: Checkout
+      - name: Get latest code
         uses: actions/checkout@v4
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
+          php-version: "8.2"
+          extensions: pdo_mysql, mbstring, tokenizer, xml, ctype, json, bcmath, fileinfo, curl
+          ini-values: post_max_size=256M, upload_max_filesize=256M
+          tools: composer:v2
 
-      - name: Copy .env
-        run: cp .env.example .env
-
-      - name: Install app
-        run: composer install
-
-      - name: Test PHP Stan
+      - name: Test PHPStan
         run: ./vendor/bin/phpstan analyse
 
-      - name: Deploy to Production
-        uses: appleboy/ssh-action@master
+      - name: Run PHP CodeSniffer (PHPCS)
+        run: ./vendor/bin/phpcs --extensions=php
+
+      # - name: Run PHPUnit Tests
+      #   run: ./vendor/bin/phpunit app/
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.9.0
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_HOST_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
-          script: |
-            'cd ${{ secrets.SSH_APP_PATH }} && ./server_deploy.sh'
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          # passphrase: ${{ secrets.SSH_PASSPHRASE }} Chỉ thêm dòng này nếu key của bạn có passphrase
+
+      - name: Clear known_hosts (Optional)
+        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts # Giúp tránh lỗi host key verification failed nếu server đổi IP
+
+      - name: Rsync files to host
+        # Rsync là công cụ đồng bộ hóa file hiệu quả qua SSH
+        # Rsync sẽ đồng bộ hóa các file từ GitHub Actions runner lên server.
+        # Chúng ta sẽ LOẠI TRỪ thư mục 'vendor/' và '.env' để chúng được xử lý trên server.
+        # 'storage/' cũng được loại trừ vì nó chứa dữ liệu user và logs.
+        # -avz: Archive mode, verbose, compress
+        # --delete: Xóa các file trên server không còn tồn tại ở local (CẨN TRỌNG!)
+        # --exclude: Loại trừ các thư mục không cần thiết
+        run: |
+          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "mkdir -p ${{ secrets.SSH_TARGET_DIR }}"
+          rsync -avz --delete \
+            --exclude '.git/' \
+            --exclude '.github/' \
+            --exclude 'node_modules/' \
+            --exclude '.env' \
+            --exclude 'storage/' \
+            --exclude 'vendor/' \
+            ./ ${{ secrets.SSH_USERNAME }}$${{ secrets.SSH_HOST }}:${{ secrets.SSH_TARGET_DIR }}
+
+      - name: Execute server deploy script
+        run: |
+          ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.SSH_TARGET_DIR }} && bash server_deploy.sh"
+
+        env:
+          APP_ENV: production
+          APP_DEBUG: false
+
+      # - name: Clear Laravel logs (Optional)
+      #   run: |
+      #     ssh ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "cd ${{ secrets.SSH_TARGET_DIR }} && \
+      #     rm -rf storage/logs/*"

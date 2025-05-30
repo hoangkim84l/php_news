@@ -32,3 +32,11 @@ Run the command `php artisan make:command GenerateSitemap` to generate sitemap
 ---
 
 No. No run ```composer update``` only run ```compose install ...``` because many package hardcode (wait for new version)
+
+-- Github action auto deploy
+```
+FTP:
+account: githubdeploy
+pass: 3gs@
+hostname: trangdo.one
+```

@@ -23,7 +23,7 @@ class PostController extends Controller
 
     public function show(string $slug)
     {
-        $post = Post::query()->where('slug', $slug)->where('hide', false)->first();
+        $post2 = Post::query()->where('slug', $slug)->where('hide', false)->first();
         if (!$post) {
             return;
         }

@@ -1,0 +1,42 @@
+name: CI - Develop Branch Checks
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  run_ci_checks:
+    name: Run CI Checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get latest code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          extensions: pdo_mysql, mbstring, tokenizer, xml, ctype, json, bcmath, fileinfo, curl
+          ini-values: post_max_size=256M, upload_max_filesize=256M
+          tools: composer:v2
+
+      - name: Install Composer dependencies
+        # Cài đặt tất cả dependencies, bao gồm dev dependencies cần cho các tool kiểm thử
+        run: composer install --prefer-dist --no-interaction
+
+      - name: Run PHPStan Analysis
+        run: ./vendor/bin/phpstan analyse --memory-limit=256M # Tăng memory-limit nếu cần
+
+      - name: Run PHP CodeSniffer (PHPCS)
+        # Đảm bảo bạn đã cài đặt "squizlabs/php_codesniffer" trong composer.json (dev-dependencies)
+        # Thay thế "PSR12" và đường dẫn "app/" nếu bạn dùng standard khác hoặc kiểm tra thư mục khác
+        run: ./vendor/bin/phpcs app/
+
+      # - name: Run PHPUnit Tests
+      # Đảm bảo bạn đã cài đặt "phpunit/phpunit" trong composer.json (dev-dependencies)
+      # run: ./vendor/bin/phpunit
