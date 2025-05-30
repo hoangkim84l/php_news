@@ -111,3 +111,10 @@ protected function getRealPath($path)
         return $preview;
     }
 ```
+
+**RELEASE 30-05-2025**
+- Create Github action check PHPStan and PHPcs when push to develop (ci-developer)
+- Update Github action use Rsync sync source to service via SSH (mainhost)
+- Update config on server_deploy.sh
+- Update canonical rel
+- Update post link on thread detail

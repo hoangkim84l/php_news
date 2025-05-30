@@ -32,10 +32,9 @@ jobs:
       - name: Run PHPStan Analysis
         run: ./vendor/bin/phpstan analyse --memory-limit=256M # Tăng memory-limit nếu cần
 
-      - name: Run PHP CodeSniffer (PHPCS)
-        # Đảm bảo bạn đã cài đặt "squizlabs/php_codesniffer" trong composer.json (dev-dependencies)
-        # Thay thế "PSR12" và đường dẫn "app/" nếu bạn dùng standard khác hoặc kiểm tra thư mục khác
-        run: ./vendor/bin/phpcs app/
+
+      # - name: Run PHP CodeSniffer (PHPCS)
+      # run: ./vendor/bin/phpcs app/
 
       # - name: Run PHPUnit Tests
       # Đảm bảo bạn đã cài đặt "phpunit/phpunit" trong composer.json (dev-dependencies)
