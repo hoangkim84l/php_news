@@ -17,14 +17,23 @@ class HomeController extends Controller
 
         $populars = Post::query()->orderBy('view', 'desc')->where('hide', false)->limit(14)->get();
         $highlight = Catalog::query()
-        ->where('slug', 'highlight')
-        ->with(['posts' => function ($query) {
-            $query->orderBy('id', 'desc')->limit(6);
-        }])
-        ->first();
+            ->where('slug', 'highlight')
+            ->with(['posts' => function ($query) {
+                $query->orderBy('id', 'desc')->limit(6);
+            }])
+            ->first();
 
 
         $phoBienMoiPost = Post::query()->orderBy('id', 'desc')->where('hide', false)->limit(10)->get();
-        return view('layouts.home.home', compact('trendingPosts', 'phoBienMoiPost', 'new3Posts', 'categoriesAsTags', 'populars', 'highlight'));
+        // return view('layouts.home.home', compact('trendingPosts', 'phoBienMoiPost', 'new3Posts', 'categoriesAsTags', 'populars', 'highlight'));
+        return response()->json([
+            'trendingPosts' => $trendingPosts,
+            'new3Posts' => $new3Posts,
+            'populars' => $populars,
+            'highlight' => [
+                'posts' => $highlight,
+            ],
+            'phoBienMoiPost' => $phoBienMoiPost,
+        ]);
     }
 }

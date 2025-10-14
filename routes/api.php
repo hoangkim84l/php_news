@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 // PUBLIC ROUTES ----------------------------------------------------
+
+Route::get('/threads/quick', [HomeController::class, 'index']);
 
 Route::middleware('throttle:api')
     ->group(function () {

@@ -118,3 +118,25 @@ protected function getRealPath($path)
 - Update config on server_deploy.sh
 - Update canonical rel
 - Update post link on thread detail
+
+
+**RELEASE 14-10-2025**
+```
+Install package
+npm install
+npm install --save-dev vite laravel-vite-plugin
+npm install react react-dom react-router-dom
+npm install --save-dev @vitejs/plugin-react
+
+
+Create folder 
+mkdir -p resources/js/{components,pages,layouts,router,utils}
+touch resources/js/app.jsx
+touch resources/views/app.blade.php
+
+Install tailwin css
+npm install react-router-dom
+npm install -D tailwindcss postcss autoprefixer
+npm install -D @tailwindcss/cli
+npx tailwindcss init -p
+```
